@@ -45,5 +45,31 @@ event = {
     ]
 }
 
+## event = {
+## "messages": [
+## {
+## "original_measure": {
+## "dev_id": "dev1",
+## "device_type": "sensor1",
+## "point_type": "unknown_point",
+## "tmst": "2021-11-03 15:01:45.833454",
+## "topic": "measure",
+## "units": "celsius",
+## "value": 10,
+## },
+## "computed_definition": {
+## "dev_id": "dev1",
+## "point_type": "high_temp",
+## "units": "bool",
+## "dependent_point_type": "unknown_point",
+## "operator": ">=",
+## "raw_value": 15,
+## "variable_value": None,
+## },
+## }
+## ]
+## }
+
+
 if __name__ == "__main__":
     handler(event)

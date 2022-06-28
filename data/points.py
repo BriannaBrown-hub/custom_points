@@ -17,7 +17,7 @@ sample_data = [
 ]
 
 
-def return_sample_data(dev_id):
+def return_sample_data(dev_id: str) -> list:
     return next(
         (data["points"] for data in sample_data if data["dev_id"] == dev_id),
         None,
