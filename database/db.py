@@ -1,26 +1,26 @@
 from sqlalchemy import create_engine
 from sqlalchemy import Column, Integer, String, DateTime, Float
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+import datetime
 
 engine = create_engine("sqlite:///database.db", echo=True)
 
 Base = declarative_base()
 
 
-class PointValue(Base):
-    __tablename__ = "point_values"
+class LatestPointValue(Base):
+    __tablename__ = "latest_point_values"
 
     id = Column(Integer, primary_key=True)
     dev_id = Column(String)
     point_type = Column(String)
     units = Column(String)
     value = Column(Float)
-    time = Column(DateTime)
+    time = Column(DateTime, default=datetime.datetime.utcnow)
 
     def __repr__(self):
         return (
-            "<Point(dev_id='%s', point_type='%s', units='%s', value='%s', time='%s')>"
+            "<Point Value(dev_id='%s', point_type='%s', units='%s', value='%s', time='%s')>"
             % (
                 self.dev_id,
                 self.point_type,
@@ -45,7 +45,7 @@ class CustomPointDefinition(Base):
 
     def __repr__(self):
         return (
-            "<Point(dev_id='%s', point_type='%s', units='%s', dependent_point_type='%s', operator='%s', raw_value='%s', variable_value='%s')>"
+            "<Custom Point Definition(dev_id='%s', point_type='%s', units='%s', dependent_point_type='%s', operator='%s', raw_value='%s', variable_value='%s')>"
             % (
                 self.dev_id,
                 self.point_type,

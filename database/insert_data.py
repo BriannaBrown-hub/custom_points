@@ -16,6 +16,6 @@ sample_data = [
 ]
 
 for data in sample_data:
-    session.execute(insert(db.PointValue), data)
+    session.execute(insert(db.LatestPointValue), data)
 
 session.commit()
