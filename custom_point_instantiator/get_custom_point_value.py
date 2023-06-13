@@ -1,8 +1,9 @@
-from ast import Num
 from .custom_exceptions import PointNotFound, EvaluationError
 
 
 def find_required_points_value(latest_points: list[dict], required_point: str) -> float:
+    """Retrieves a single point value"""
+
     value = next(
         (
             point["value"]
@@ -22,34 +23,40 @@ def find_required_points_value(latest_points: list[dict], required_point: str) -
 
 
 def get_first_argument(
-    latest_points: list[dict], computed_point_definition: dict
+    latest_points: list[dict], custom_point_definition: dict
 ) -> float:
-    dependent_point_type = computed_point_definition.get("dependent_point_type", None)
+    """Returns value to left of operand"""
+
+    dependent_point_type = custom_point_definition.get("dependent_point_type", None)
 
     return find_required_points_value(latest_points, dependent_point_type)
 
 
 def get_second_argument(
-    latest_points: list[dict], computed_point_definition: dict
+    latest_points: list[dict], custom_point_definition: dict
 ) -> float:
-    variable_value = computed_point_definition.get("variable_value", None)
+    """Returns value to right of operand"""
+
+    variable_value = custom_point_definition.get("variable_value", None)
 
     if variable_value:
         argument = find_required_points_value(latest_points, variable_value)
     else:
-        argument = computed_point_definition.get("raw_value", None)
+        argument = custom_point_definition.get("raw_value", None)
 
     return argument
 
 
-def get_computed_point_value(
-    latest_points: list[dict], computed_point_definition: dict
+def get_custom_point_value(
+    latest_points: list[dict], custom_point_definition: dict
 ) -> float:
-    first_arg = get_first_argument(latest_points, computed_point_definition)
+    """Instantiates custom point value"""
 
-    second_arg = get_second_argument(latest_points, computed_point_definition)
+    first_arg = get_first_argument(latest_points, custom_point_definition)
 
-    operator = computed_point_definition.get("operator", None)
+    second_arg = get_second_argument(latest_points, custom_point_definition)
+
+    operator = custom_point_definition.get("operator", None)
 
     try:
         equation = "{} {} {}".format(first_arg, operator, second_arg)
