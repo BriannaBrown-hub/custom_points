@@ -1,5 +1,5 @@
 from .custom_exceptions import PointNotFound, EvaluationError
-from .db import engine, LatestPointValue, CustomPointDefinition
+from .db import engine, PointValue, CustomPointDefinition
 from sqlalchemy.orm import sessionmaker
 
 session = sessionmaker(bind=engine)()
@@ -9,7 +9,7 @@ def find_required_points_value(dev_id: str, point_type: str) -> float:
     """Retrieves a single point value"""
 
     latest_point_value = (
-        session.query(LatestPointValue)
+        session.query(PointValue)
         .where(dev_id == dev_id)
         .where(point_type == point_type)
         .first()
@@ -74,7 +74,7 @@ def instantiate_values() -> None:
         custom_point_value = get_custom_point_value(custom_point_dict)
 
         custom_point_values.append(
-            LatestPointValue(
+            PointValue(
                 dev_id=custom_point.dev_id,
                 point_type=custom_point.point_type,
                 units=custom_point.units,

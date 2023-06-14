@@ -7,10 +7,12 @@ const CustomPointModal = () => {
     point_type: "",
     units: "",
     dependent_point_type: "",
-    raw_value: null,
+    raw_value: "",
     variable_value: "",
     operator: "",
   });
+
+  const onClose = () => setIsOpen(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,8 +59,29 @@ const CustomPointModal = () => {
         <div className="fixed inset-0 flex items-center justify-center">
           <div className="modal-overlay absolute inset-0 bg-gray-500 opacity-75" />
 
-          <div className="modal-container bg-white w-1/3 rounded shadow-lg z-50">
-            <h2 className="text-xl font-bold mb-4">Create Custom Point</h2>
+          <div className="modal-container bg-white w-1/2 rounded shadow-lg z-50">
+            <div className="flex">
+              <h2 className="flex-1 text-xl font-bold m-4">
+                Create Custom Point
+              </h2>
+              <button
+                className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-300 hover:bg-gray-400 m-4"
+                onClick={onClose}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4 text-gray-700"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M13.414 10l4.293-4.293a1 1 0 00-1.414-1.414L12 8.586 7.707 4.293a1 1 0 10-1.414 1.414L10.586 10l-4.293 4.293a1 1 0 001.414 1.414L12 11.414l4.293 4.293a1 1 0 001.414-1.414L13.414 10z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+            </div>
             <form onSubmit={handleSubmit} className="p-4">
               <div className="mb-4">
                 <label htmlFor="dev_id" className="block font-bold mb-1">

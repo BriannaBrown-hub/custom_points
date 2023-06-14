@@ -1,4 +1,4 @@
-from .db import LatestPointValue, engine
+from .db import PointValue, engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import func
 from sqlalchemy import and_
@@ -11,21 +11,25 @@ def most_recent_points():
     # Query for the most recent record for each point_type
     subquery = (
         session.query(
-            LatestPointValue.point_type,
-            LatestPointValue.dev_id,
-            func.max(LatestPointValue.time).label("max_time"),
+            PointValue.point_type,
+            PointValue.dev_id,
+            func.max(PointValue.time).label("max_time"),
         )
-        .group_by(LatestPointValue.point_type, LatestPointValue.dev_id)
+        .group_by(PointValue.point_type, PointValue.dev_id)
         .subquery()
     )
 
-    query = session.query(LatestPointValue).join(
-        subquery,
-        and_(
-            LatestPointValue.dev_id == subquery.c.dev_id,
-            LatestPointValue.point_type == subquery.c.point_type,
-            LatestPointValue.time == subquery.c.max_time,
-        ),
+    query = (
+        session.query(PointValue)
+        .join(
+            subquery,
+            and_(
+                PointValue.dev_id == subquery.c.dev_id,
+                PointValue.point_type == subquery.c.point_type,
+                PointValue.time == subquery.c.max_time,
+            ),
+        )
+        .order_by(PointValue.dev_id)
     )
 
     # Execute the query and retrieve the results

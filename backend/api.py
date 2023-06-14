@@ -1,7 +1,8 @@
 from flask import Flask, request
 from .query_data import most_recent_points
-from .db import engine, CustomPointDefinition
+from .db import engine, CustomPointDefinition, PointValue
 from flask_cors import CORS
+from sqlalchemy import insert
 from sqlalchemy.orm import sessionmaker
 from .custom_point_instantiator import instantiate_values
 
@@ -9,6 +10,32 @@ session = sessionmaker(bind=engine)()
 
 app = Flask(__name__)
 CORS(app)
+
+
+@app.route("/delete_data", methods=["DELETE"])
+def delete_data():
+    session.query(CustomPointDefinition).delete()
+    session.query(PointValue).delete()
+    session.commit()
+    return "Data deleted successfully", 200
+
+
+@app.route("/seed_data", methods=["POST"])
+def seed_data():
+    sample_data = [
+        {"dev_id": "dev1", "point_type": "temp", "units": "celsius", "value": 10},
+        {"dev_id": "dev1", "point_type": "power", "units": "kwh", "value": 50},
+        {"dev_id": "dev2", "point_type": "temp", "units": "celsius", "value": 35},
+        {"dev_id": "dev2", "point_type": "load", "units": "kwh", "value": 50},
+        {"dev_id": "dev2", "point_type": "power", "units": "kwh", "value": 40},
+    ]
+
+    for data in sample_data:
+        session.execute(insert(PointValue), data)
+
+    session.commit()
+
+    return "Data seeded successfully", 200
 
 
 @app.route("/get_latest_points")

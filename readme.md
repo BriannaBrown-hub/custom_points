@@ -4,9 +4,11 @@
 
 This is a (modified) portion of a solution that allows for platform users to develop custom points based off of existing sensor data. This is a useful feature to customers as it allows for customization and value to the platform.
 
-As data is read from sensors, a listener checks for custom point dependencies. If a dependency is found, the original data message, along with the custom point definition is routed to this solution.
+In the original implementation, as data is read from sensors, a listener checks for custom point dependencies. If a dependency is found, the original data message, along with the custom point definition is routed to this solution.
 
 After the custom point value is determined, the message would be returned to the data pipeline for further analysis and storage.
+
+This portion of the solution allows users to create new custom points, and then calculate the custom point definitions based off of the most recent values of the "raw" data point values.
 
 ## Custom Points
 
@@ -36,10 +38,16 @@ This solution has been modified to run locally. In production, this solution exi
 
 ## Running the simulation
 
-To run this program enter the following in the command line:
+To run this program start the flask application with:
 
 ```
-python run.py
+cd backend
+flask --app api run
 ```
 
-To simulate an error an `-error` flag can be added.
+You will also need to start the react app with:
+
+```
+cd frontend
+npm run dev
+```

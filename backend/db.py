@@ -8,8 +8,8 @@ engine = create_engine("sqlite:///database.db", echo=True)
 Base = declarative_base()
 
 
-class LatestPointValue(Base):
-    __tablename__ = "latest_point_values"
+class PointValue(Base):
+    __tablename__ = "point_values"
 
     id = Column(Integer, primary_key=True)
     dev_id = Column(String)
@@ -40,7 +40,7 @@ class CustomPointDefinition(Base):
     units = Column(String)
     dependent_point_type = Column(String)
     operator = Column(String)
-    raw_value = Column(Float)
+    raw_value = Column(String)
     variable_value = Column(String)
 
     def __repr__(self):
