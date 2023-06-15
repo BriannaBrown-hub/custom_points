@@ -76,6 +76,7 @@ def instantiate_values() -> None:
         custom_point_values.append(
             PointValue(
                 dev_id=custom_point.dev_id,
+                custom_point=True,
                 point_type=custom_point.point_type,
                 units=custom_point.units,
                 value=custom_point_value,

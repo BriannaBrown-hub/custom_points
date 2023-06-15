@@ -9,6 +9,9 @@ const LatestValuesTable = (data) => {
           <thead>
             <tr>
               <th className="py-2 px-4 border-b border-gray-200">Device ID</th>
+              <th className="py-2 px-4 border-b border-gray-200">
+                Custom Point
+              </th>
               <th className="py-2 px-4 border-b border-gray-200">Point Type</th>
               <th className="py-2 px-4 border-b border-gray-200">Units</th>
               <th className="py-2 px-4 border-b border-gray-200">Value</th>
@@ -20,6 +23,9 @@ const LatestValuesTable = (data) => {
               <tr key={entry.id}>
                 <td className="py-2 px-4 border-b border-gray-200 text-center">
                   {entry.dev_id}
+                </td>
+                <td className="py-2 px-4 border-b border-gray-200 text-center">
+                  {entry.custom_point ? "True" : "False"}
                 </td>
                 <td className="py-2 px-4 border-b border-gray-200 text-center">
                   {entry.point_type}

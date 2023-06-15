@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine
-from sqlalchemy import Column, Integer, String, DateTime, Float
+from sqlalchemy import Column, Integer, String, DateTime, Float, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 import datetime
 
@@ -13,6 +13,7 @@ class PointValue(Base):
 
     id = Column(Integer, primary_key=True)
     dev_id = Column(String)
+    custom_point = Column(Boolean)
     point_type = Column(String)
     units = Column(String)
     value = Column(Float)
@@ -20,9 +21,10 @@ class PointValue(Base):
 
     def __repr__(self):
         return (
-            "<Point Value(dev_id='%s', point_type='%s', units='%s', value='%s', time='%s')>"
+            "<Point Value(dev_id='%s', custom_point='%s', point_type='%s', units='%s', value='%s', time='%s')>"
             % (
                 self.dev_id,
+                self.custom_point,
                 self.point_type,
                 self.units,
                 self.value,

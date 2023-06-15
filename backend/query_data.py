@@ -39,6 +39,7 @@ def most_recent_points():
         {
             "id": record.id,
             "dev_id": record.dev_id,
+            "custom_point": record.custom_point,
             "point_type": record.point_type,
             "units": record.units,
             "value": record.value,

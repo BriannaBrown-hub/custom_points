@@ -23,11 +23,41 @@ def delete_data():
 @app.route("/seed_data", methods=["POST"])
 def seed_data():
     sample_data = [
-        {"dev_id": "dev1", "point_type": "temp", "units": "celsius", "value": 10},
-        {"dev_id": "dev1", "point_type": "power", "units": "kwh", "value": 50},
-        {"dev_id": "dev2", "point_type": "temp", "units": "celsius", "value": 35},
-        {"dev_id": "dev2", "point_type": "load", "units": "kwh", "value": 50},
-        {"dev_id": "dev2", "point_type": "power", "units": "kwh", "value": 40},
+        {
+            "dev_id": "dev1",
+            "custom_point": False,
+            "point_type": "temp",
+            "units": "celsius",
+            "value": 10,
+        },
+        {
+            "dev_id": "dev1",
+            "custom_point": False,
+            "point_type": "power",
+            "units": "kwh",
+            "value": 50,
+        },
+        {
+            "dev_id": "dev2",
+            "custom_point": False,
+            "point_type": "temp",
+            "units": "celsius",
+            "value": 35,
+        },
+        {
+            "dev_id": "dev2",
+            "custom_point": False,
+            "point_type": "load",
+            "units": "kwh",
+            "value": 50,
+        },
+        {
+            "dev_id": "dev2",
+            "custom_point": False,
+            "point_type": "power",
+            "units": "kwh",
+            "value": 40,
+        },
     ]
 
     for data in sample_data:

@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 
+const initialState = {
+  dev_id: "",
+  point_type: "",
+  units: "",
+  dependent_point_type: "",
+  raw_value: "",
+  variable_value: "",
+  operator: "",
+};
+
 const CustomPointModal = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    dev_id: "",
-    point_type: "",
-    units: "",
-    dependent_point_type: "",
-    raw_value: "",
-    variable_value: "",
-    operator: "",
-  });
+  const [formData, setFormData] = useState(initialState);
 
   const onClose = () => setIsOpen(false);
 
@@ -32,6 +34,7 @@ const CustomPointModal = () => {
       if (response.ok) {
         console.log("Custom Point created successfully");
         setIsOpen(false);
+        setFormData(initialState);
       } else {
         console.error("Error creating Custom Point");
       }
@@ -193,9 +196,9 @@ const CustomPointModal = () => {
                   <option value="/">/</option>
                   <option value="*">*</option>
                   <option value="==">==</option>
-                  <option value=">=">>=</option>
+                  <option value=">=">&gt;=</option>
                   <option value="<=">&lt;=</option>
-                  <option value=">">></option>
+                  <option value=">">&gt;</option>
                   <option value="<">&lt;</option>
                 </select>
               </div>

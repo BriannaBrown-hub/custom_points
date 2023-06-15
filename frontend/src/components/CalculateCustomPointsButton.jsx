@@ -1,8 +1,8 @@
 import React from "react";
 
 const CalculateCustomPointsButton = ({ fetchLatestValues }) => {
-  const handleClick = () => {
-    calculateCustomPointValue();
+  const handleClick = async () => {
+    await calculateCustomPointValue();
     fetchLatestValues();
   };
 
